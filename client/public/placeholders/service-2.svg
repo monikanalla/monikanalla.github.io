@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Placeholder service image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#221b15" /><stop offset="0.55" stop-color="#12100d" /><stop offset="1" stop-color="#080706" />
+    </linearGradient>
+    <linearGradient id="co" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c98b5e" stop-opacity="0.15" /><stop offset="0.5" stop-color="#f0d6bd" stop-opacity="0.9" /><stop offset="1" stop-color="#c98b5e" stop-opacity="0.15" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)" />
+  <g fill="none" stroke="url(#co)">
+    <path d="M60 560 C 300 320, 520 760, 1140 420" stroke-width="2" />
+    <path d="M60 620 C 300 380, 520 820, 1140 480" stroke-width="1.4" stroke-opacity="0.65" />
+    <path d="M60 680 C 300 440, 520 880, 1140 540" stroke-width="1" stroke-opacity="0.4" />
+    <path d="M60 500 C 300 260, 520 700, 1140 360" stroke-width="1" stroke-opacity="0.28" />
+  </g>
+  <text x="600" y="790" text-anchor="middle" font-family="Georgia, serif" font-size="34" letter-spacing="12" fill="#efe4d2" fill-opacity="0.55">PLACEHOLDER</text>
+  <text x="600" y="826" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" letter-spacing="5" fill="#a79d93">REPLACE WITH CLIENT PHOTO</text>
+</svg>

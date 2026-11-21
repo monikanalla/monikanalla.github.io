@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Placeholder transformation">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0" stop-color="#241d17" /><stop offset="0.5" stop-color="#13100d" /><stop offset="1" stop-color="#080706" />
+    </linearGradient>
+    <linearGradient id="co" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0d6bd" stop-opacity="0.7" /><stop offset="1" stop-color="#95603c" stop-opacity="0.15" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <g fill="none" stroke="url(#co)">
+    <path d="M200 820 Q 800 180 1400 820" stroke-width="2.2" />
+    <path d="M320 880 Q 800 300 1280 880" stroke-width="1.2" stroke-opacity="0.55" />
+    <path d="M80 760 Q 800 100 1520 760" stroke-width="0.9" stroke-opacity="0.3" />
+  </g>
+  <text x="800" y="905" text-anchor="middle" font-family="Georgia, serif" font-size="40" letter-spacing="16" fill="#efe4d2" fill-opacity="0.5">PLACEHOLDER</text>
+  <text x="800" y="945" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" letter-spacing="6" fill="#a79d93">REPLACE WITH A REAL TRANSFORMATION</text>
+</svg>

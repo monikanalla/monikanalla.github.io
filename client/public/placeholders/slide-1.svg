@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-label="Placeholder transformation">
+  <defs>
+    <linearGradient id="bg" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#2a2119" /><stop offset="0.45" stop-color="#14110e" /><stop offset="1" stop-color="#080706" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.6" cy="0.35" r="0.6">
+      <stop offset="0" stop-color="#c98b5e" stop-opacity="0.35" /><stop offset="1" stop-color="#c98b5e" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <rect width="1600" height="1000" fill="url(#glow)" />
+  <g fill="none" stroke="#e6bd97" stroke-opacity="0.45">
+    <path d="M240 860 C 420 300, 1180 300, 1360 860" stroke-width="2.4" />
+    <path d="M360 940 C 520 420, 1080 420, 1240 940" stroke-width="1.2" stroke-opacity="0.5" />
+    <circle cx="800" cy="470" r="240" stroke-width="0.9" stroke-opacity="0.3" />
+  </g>
+  <text x="800" y="905" text-anchor="middle" font-family="Georgia, serif" font-size="40" letter-spacing="16" fill="#efe4d2" fill-opacity="0.5">PLACEHOLDER</text>
+  <text x="800" y="945" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" letter-spacing="6" fill="#a79d93">REPLACE WITH A REAL TRANSFORMATION</text>
+</svg>

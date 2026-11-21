@@ -1,0 +1,28 @@
+{
+  "name": "hair5s-salon",
+  "private": true,
+  "version": "1.0.0",
+  "description": "HAIR5S Unisex Salon — light editorial MERN salon website with a 3D hero, photo slider, WhatsApp booking and a protected admin panel.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:all": "concurrently -n db,api,web -c yellow,magenta,cyan \"npm:dev:db\" \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:db": "node server/scripts/dev-db.mjs",
+    "dev:server": "npm run dev --workspace server",
+    "dev:client": "npm run dev --workspace client",
+    "build": "npm run build --workspace server && npm run build --workspace client",
+    "typecheck": "npm run typecheck --workspace server && npm run typecheck --workspace client",
+    "seed": "npm run seed --workspace server",
+    "seed:reset": "npm run seed:reset --workspace server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "mongodb-memory-server": "^10.1.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

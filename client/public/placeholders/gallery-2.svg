@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" width="900" height="1125" role="img" aria-label="Placeholder gallery image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#221b15" /><stop offset="0.55" stop-color="#12100d" /><stop offset="1" stop-color="#080706" />
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1125" fill="url(#bg)" />
+  <g fill="none" stroke="#e6bd97" stroke-opacity="0.4">
+    <rect x="180" y="240" width="540" height="620" rx="16" stroke-width="1.2" />
+    <rect x="240" y="300" width="420" height="500" rx="10" stroke-width="0.8" stroke-opacity="0.5" />
+    <path d="M240 660 L 660 660" stroke-width="0.8" stroke-opacity="0.45" />
+    <circle cx="450" cy="480" r="90" stroke-width="0.9" stroke-opacity="0.6" />
+  </g>
+  <text x="450" y="1000" text-anchor="middle" font-family="Georgia, serif" font-size="26" letter-spacing="10" fill="#efe4d2" fill-opacity="0.5">PLACEHOLDER</text>
+  <text x="450" y="1032" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4" fill="#a79d93">STYLING CHAIR</text>
+</svg>
