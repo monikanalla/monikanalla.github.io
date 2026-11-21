@@ -82,8 +82,8 @@ export function HomePage() {
             </span>
           </div>
 
-          <div className="grid items-end gap-10 py-12 lg:grid-cols-[1.4fr_0.6fr]">
-            <h1 className="animate-fade-up text-balance font-display text-[clamp(3rem,9.6vw,8.4rem)] font-semibold leading-[0.84] tracking-[-0.055em] text-char">
+          <div className="max-w-2xl py-12 lg:max-w-[56%]">
+            <h1 className="animate-fade-up text-balance font-display text-[clamp(3rem,8.6vw,7.6rem)] font-semibold leading-[0.84] tracking-[-0.055em] text-char">
               {heroLead ? (
                 <>
                   {heroLead}
@@ -93,29 +93,27 @@ export function HomePage() {
               <span className="display-serif text-wine-500">{heroTail}</span>
             </h1>
 
-            <div className="max-w-sm lg:pb-3">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-wine-500">
-                Hair · Skin · Nails
-              </p>
-              <p className="text-[15px] leading-relaxed text-ash">
-                {settings.heroSubhead ||
-                  'HAIR5S is a unisex salon in Mumbai for cut, colour, keratin, skin, nails, lashes, extensions and microblading.'}
-              </p>
+            <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.26em] text-wine-500">
+              Hair · Skin · Nails
+            </p>
+            <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ash">
+              {settings.heroSubhead ||
+                'HAIR5S is a unisex salon in Mumbai for cut, colour, keratin, skin, nails, lashes, extensions and microblading.'}
+            </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                {heroLink ? (
-                  <a href={heroLink} target="_blank" rel="noreferrer noopener" className="btn">
-                    Book on WhatsApp
-                  </a>
-                ) : (
-                  <Link to="/contact" className="btn">
-                    Enquire about a slot
-                  </Link>
-                )}
-                <Link to="/services" className="btn-ghost">
-                  The menu
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              {heroLink ? (
+                <a href={heroLink} target="_blank" rel="noreferrer noopener" className="btn">
+                  Book on WhatsApp
+                </a>
+              ) : (
+                <Link to="/contact" className="btn">
+                  Enquire about a slot
                 </Link>
-              </div>
+              )}
+              <Link to="/services" className="btn-ghost">
+                The menu
+              </Link>
             </div>
           </div>
 
