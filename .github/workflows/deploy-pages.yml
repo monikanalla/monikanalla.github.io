@@ -30,7 +30,9 @@ jobs:
       - name: Build client
         run: npm run build --workspace client
         env:
-          VITE_BASE: /${{ github.event.repository.name }}/
+          # User site repo (owner.github.io) serves from "/"; a project repo needs "/<repo-name>/",
+          # which can be overridden with a repository variable named VITE_BASE.
+          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_PUBLIC_SITE_URL: ${{ vars.VITE_PUBLIC_SITE_URL }}
 
