@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://hair5s.example/sitemap.xml
+Sitemap: https://monikanalla.github.io/sitemap.xml

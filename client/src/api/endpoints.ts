@@ -20,28 +20,113 @@ const query = (params: Record<string, string | undefined>): string => {
 
 /* --------------------------------- public -------------------------------- */
 
-export const getSettings = (signal?: AbortSignal) => apiRequest<Settings>('/api/settings', { signal });
-export const getCategories = (signal?: AbortSignal) => apiRequest<Category[]>('/api/categories', { signal });
-export const getGallery = (signal?: AbortSignal) => apiRequest<GalleryItem[]>('/api/gallery', { signal });
-export const getReviews = (signal?: AbortSignal) => apiRequest<Review[]>('/api/reviews', { signal });
+interface ProductFilters {
+  category?: string;
+  q?: string;
+  sort?: string;
+  type?: string;
+  featured?: boolean;
+}
 
-export const getProducts = (
-  params: { category?: string; q?: string; sort?: string; type?: string; featured?: boolean } = {},
+const staticRequests = new Map<string, Promise<unknown>>();
+
+/**
+ * Seeded catalogue mirrored into `public/data` at build time. The GitHub Pages build is a static
+ * bundle with no Express process behind it, so public reads fall back to this snapshot.
+ */
+function loadStatic<T>(name: string): Promise<T> {
+  let request = staticRequests.get(name) as Promise<T> | undefined;
+  if (!request) {
+    request = fetch(`${import.meta.env.BASE_URL}data/${name}.json`).then((response) => {
+      if (!response.ok) throw new Error(`Offline data unavailable (${response.status})`);
+      return response.json() as Promise<T>;
+    });
+    staticRequests.set(name, request);
+  }
+  return request;
+}
+
+const isAbort = (error: unknown): boolean => error instanceof Error && error.name === 'AbortError';
+
+async function readThrough<T>(name: string, request: () => Promise<T>): Promise<T> {
+  try {
+    return await request();
+  } catch (error) {
+    if (isAbort(error)) throw error;
+    return loadStatic<T>(name);
+  }
+}
+
+const filterProducts = (products: Product[], filters: ProductFilters): Product[] => {
+  let list = products.filter((product) => !filters.type || product.type === filters.type);
+  if (filters.featured) list = list.filter((product) => product.featured);
+  if (filters.category) {
+    list = list.filter((product) =>
+      typeof product.category === 'string'
+        ? product.category === filters.category
+        : product.category.slug === filters.category,
+    );
+  }
+  if (filters.q) {
+    const needle = filters.q.trim().toLowerCase();
+    list = list.filter((product) =>
+      `${product.name} ${product.shortDescription ?? ''}`.toLowerCase().includes(needle),
+    );
+  }
+
+  const sorted = [...list];
+  if (filters.sort === 'price-asc') sorted.sort((a, b) => a.price - b.price);
+  else if (filters.sort === 'price-desc') sorted.sort((a, b) => b.price - a.price);
+  else if (filters.sort === 'newest') {
+    sorted.sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''));
+  } else sorted.sort((a, b) => a.order - b.order);
+  return sorted;
+};
+
+export const getSettings = (signal?: AbortSignal) =>
+  readThrough<Settings>('settings', () => apiRequest<Settings>('/api/settings', { signal }));
+
+export const getCategories = (signal?: AbortSignal) =>
+  readThrough<Category[]>('categories', () => apiRequest<Category[]>('/api/categories', { signal }));
+
+export const getGallery = (signal?: AbortSignal) =>
+  readThrough<GalleryItem[]>('gallery', () => apiRequest<GalleryItem[]>('/api/gallery', { signal }));
+
+export const getReviews = (signal?: AbortSignal) =>
+  readThrough<Review[]>('reviews', () => apiRequest<Review[]>('/api/reviews', { signal }));
+
+export const getProducts = async (
+  params: ProductFilters = {},
   signal?: AbortSignal,
-) =>
-  apiRequest<Product[]>(
-    `/api/products${query({
-      category: params.category,
-      q: params.q,
-      sort: params.sort,
-      type: params.type,
-      featured: params.featured ? 'true' : undefined,
-    })}`,
-    { signal },
-  );
+): Promise<Product[]> => {
+  try {
+    return await apiRequest<Product[]>(
+      `/api/products${query({
+        category: params.category,
+        q: params.q,
+        sort: params.sort,
+        type: params.type,
+        featured: params.featured ? 'true' : undefined,
+      })}`,
+      { signal },
+    );
+  } catch (error) {
+    if (isAbort(error)) throw error;
+    return filterProducts(await loadStatic<Product[]>('products'), params);
+  }
+};
 
-export const getProduct = (slug: string, signal?: AbortSignal) =>
-  apiRequest<Product>(`/api/products/${encodeURIComponent(slug)}`, { signal });
+export const getProduct = async (slug: string, signal?: AbortSignal): Promise<Product> => {
+  try {
+    return await apiRequest<Product>(`/api/products/${encodeURIComponent(slug)}`, { signal });
+  } catch (error) {
+    if (isAbort(error)) throw error;
+    const products = await loadStatic<Product[]>('products');
+    const match = products.find((product) => product.slug === slug);
+    if (!match) throw error;
+    return match;
+  }
+};
 
 export const submitReview = (body: { name: string; rating: number; text: string; service?: string }) =>
   apiRequest<{ id: string; message: string }>('/api/reviews', { method: 'POST', body });
